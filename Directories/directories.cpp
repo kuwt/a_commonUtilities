@@ -1,22 +1,23 @@
-#include <boost/filesystem.hpp>
+#include <experimental/filesystem>
 #include <string>
 #include <vector>
 
+namespace fs = std::experimental::filesystem;
 
 // return the filenames of all files that have the specified extension
 // in the specified directory and all subdirectories
-void get_all_file(const ::boost::filesystem::path& root,
+void get_all_file(const fs::path& root,
 	const std::string& ext,
-	std::vector<::boost::filesystem::path>& ret)
+	std::vector<fs::path>& ret)
 {
-	if (!::boost::filesystem::exists(root) || !::boost::filesystem::is_directory(root)) return;
+	if (!fs::exists(root) || !fs::is_directory(root)) return;
 
-	::boost::filesystem::recursive_directory_iterator it(root);
-	::boost::filesystem::recursive_directory_iterator endit;
+	fs::recursive_directory_iterator it(root);
+	fs::recursive_directory_iterator endit;
 
 	while (it != endit)
 	{
-		if (::boost::filesystem::is_regular_file(*it) && it->path().extension() == ext)
+		if (fs::is_regular_file(*it) && it->path().extension() == ext)
 		{
 			ret.push_back(it->path());
 		}
@@ -30,10 +31,10 @@ int listAllFilesPathsFromDir(const std::string& dirPath,
 	std::vector<std::string> &path)
 {
 	path.clear();
-	std::vector<::boost::filesystem::path> dataPaths;
+	std::vector<fs::path> dataPaths;
 
 	{
-		std::vector<::boost::filesystem::path> dataPathsPerExt;
+		std::vector<fs::path> dataPathsPerExt;
 
 		dataPathsPerExt.clear();
 		get_all_file(dirPath,
