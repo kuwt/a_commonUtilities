@@ -7,6 +7,10 @@ namespace fs = std::experimental::filesystem;
 
 namespace dir
 {
+	/********************************************/
+	//              utilities
+	
+	
 	// return the filenames of all files that have the specified extension
 	// in the specified directory and all subdirectories
 	void get_all_file(const fs::path& root,
@@ -29,6 +33,10 @@ namespace dir
 	}
 
 
+	/********************************************/
+	//              API
+
+	/**********listAllFilesPathsFromDir***********/
 	int listAllFilesPathsFromDir(const std::string& dirPath,
 		const std::string &extension,
 		std::vector<std::string> &path)
@@ -46,7 +54,7 @@ namespace dir
 			dataPaths.insert(dataPaths.end(), dataPathsPerExt.begin(), dataPathsPerExt.end());
 
 		}
-		for (int i = 0; i < dataPaths.size(); ++i)
+		for (unsigned i = 0; i < dataPaths.size(); ++i)
 		{
 			std::string dataPath = dataPaths.at(i).string();
 			path.push_back(dataPath);
@@ -54,7 +62,7 @@ namespace dir
 
 		return 0;
 	}
-
+	/**********check if a particular string exist in the FIlePath string***********/
 	bool CheckIfFilePathContainSubPath(const std::string& FilePath,
 		const std::string &SubPath)
 	{
@@ -70,6 +78,7 @@ namespace dir
 
 	}
 
+	/**********Create Directory***********/
 	void CreateDir(const std::string &dir)
 	{
 		if (fs::create_directories(dir))
@@ -78,7 +87,8 @@ namespace dir
 		}
 	}
 
-	void MakeDefaultDir(const std::string &Rootdir, const std::string &folderName, std::string &Defaultdir)
+	/**********Make Directory By FolderName appended with a subindex and the directory is in dirCreated***********/
+	void MakeDirByName(const std::string &Rootdir, const std::string &folderName, std::string &dirCreated)
 	{
 		int proposeDirIdx = 0;
 		std::string strproposeDirIdx = std::to_string(proposeDirIdx);
@@ -97,6 +107,53 @@ namespace dir
 		std::string NewDir = proposeFullDir;
 		CreateDir(NewDir);
 
-		Defaultdir = NewDir;
+		dirCreated = NewDir;
+	}
+	/**********CheckFileExist***********/
+	bool CheckFileExist(const std::string &FilePath)
+	{
+		if (fs::exists(FilePath))
+		{
+			return true;
+		}
+		else
+		{
+				return false;
+		}
+	}
+
+	/**********GetAllFolderInADir***********/
+	int GetAllFolderInADir(const std::string &Directory, std::vector<std::string> &vfolderpaths  )
+	{
+		vfolderpaths.clear();
+		if (fs::exists(Directory))
+		{
+			for (auto& p : fs::recursive_directory_iterator(Directory))
+			{
+				if (p.status().type() == fs::file_type::directory)
+				{
+					vfolderpaths.push_back(p.path().string());
+				}
+			}
+			return 0;
+		}
+		else
+		{
+			return -1;
+		}
+	}
+
+	/**********FileCopy***********/
+	int FileCopy(const std::string &FromFilePath, const std::string &ToFilePath)
+	{
+		if (!FromFilePath.empty() && !ToFilePath.empty())
+		{
+			fs::copy(FromFilePath, ToFilePath);
+			return 0;
+		}
+		else
+		{
+			return -1;
+		}
 	}
 }
