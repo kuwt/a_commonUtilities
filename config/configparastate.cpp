@@ -16,10 +16,11 @@ ConfigParaState::ConfigParaState()
 
 }
 
-void ConfigParaState::SetParaState(const std::string &SectionKey, const std::string &strKey, const std::string &strValue)
+int ConfigParaState::SetParaState(const std::string &SectionKey, const std::string &strKey, const std::string &strValue)
 {
 	std::string wholekey = SectionKey + "." + strKey;
     m_mapParaState[wholekey] = strValue;
+	return 0;
 }
 int ConfigParaState::GetParaState(const std::string &SectionKey, const std::string &strKey, std::string &strValue) const
 {
@@ -84,11 +85,16 @@ int ConfigParaState::GetParaState(const std::string &SectionKey, const std::stri
 }
 
 
-void ConfigParaState::LoadCfgPara(const std::string &CfgFilePath)
+int ConfigParaState::LoadCfgPara(const std::string &CfgFilePath)
 {
 	ConfiginiHandler config(CfgFilePath);
 
 	CfgStatus status = config.LoadFile();
+	if (CONFIG_IO_OK != status)
+	{
+		return -1;
+	}
+
 	std::string strValue = "";
 
 	std::map < std::string, std::vector<std::string>> ParaNameTree;
@@ -100,7 +106,7 @@ void ConfigParaState::LoadCfgPara(const std::string &CfgFilePath)
 		std::string SectionName = iterator->first;
 		std::vector<std::string> ParamNames = iterator->second;
 
-		for (int i = 0; i < ParamNames.size(); ++i)
+		for (unsigned i = 0; i < ParamNames.size(); ++i)
 		{
 			std::string &ParamName = ParamNames.at(i);
 			status = config.GetValue(SectionName, ParamName, strValue);
@@ -110,10 +116,11 @@ void ConfigParaState::LoadCfgPara(const std::string &CfgFilePath)
 			}
 		}
 	}
+	return 0;
 }
 
 
-void ConfigParaState::SaveCfgPara(const std::string &CfgFilePath)
+int ConfigParaState::SaveCfgPara(const std::string &CfgFilePath)
 {
 	
     ConfiginiHandler config(CfgFilePath);
@@ -129,6 +136,6 @@ void ConfigParaState::SaveCfgPara(const std::string &CfgFilePath)
 	*************/
   
     status = config.SaveFile();
-	
+	return -1;
 }
 

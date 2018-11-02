@@ -12,11 +12,11 @@ public:
     // Data exchange between cache and config file
 
 	// File Interaction
-    void LoadCfgPara(const std::string &CfgFilePath); 
-    void SaveCfgPara(const std::string &CfgFilePath);  // currently Disable
+	int LoadCfgPara(const std::string &CfgFilePath);
+	int SaveCfgPara(const std::string &CfgFilePath);  // currently Disable
 	
 													   // RAM interaction
-	void SetParaState(const std::string &SectionKey, const std::string &strKey, const std::string &strValue);
+	int SetParaState(const std::string &SectionKey, const std::string &strKey, const std::string &strValue);
 	int GetParaState(const std::string &SectionKey, const std::string &strKey, std::string &strValue) const;  // Value will not be changed if fail
 
 	int GetParaState(const std::string &SectionKey, const std::string &strKey, int &iValue) const;   // Value will not be changed if fail
