@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 
+// Only support c++14 or later
 namespace dir
 {
 	int listAllFilesPathsFromDir(const std::string& dirPath,

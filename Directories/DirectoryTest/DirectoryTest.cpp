@@ -15,6 +15,12 @@ int main()
 		std::cout << folderPaths.at(i) << "\n";
 	}
 
+	//test 2
+	dir::CreateDir("TestDirectories\\log");
+	dir::CreateDir("TestDirectories\\log\\log");
+	dir::CreateDir("TestDirectories\\log\\log\\log");
+	dir::CreateDir("TestDirectories\\log1\\log1\\log1");
+
 	std::cout << "press key to continue....\n";
 	getchar();
     return 0;
