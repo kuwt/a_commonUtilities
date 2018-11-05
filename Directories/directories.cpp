@@ -123,7 +123,7 @@ namespace dir
 	}
 
 	/**********GetAllFolderInADir***********/
-	int GetAllFolderInADir(const std::string &Directory, std::vector<std::string> &vfolderpaths  )
+	int GetAllFolderPathInADir(const std::string &Directory, std::vector<std::string> &vfolderpaths)
 	{
 		vfolderpaths.clear();
 		if (fs::exists(Directory))
@@ -133,6 +133,28 @@ namespace dir
 				if (p.status().type() == fs::file_type::directory)
 				{
 					vfolderpaths.push_back(p.path().string());
+				}
+			}
+			return 0;
+		}
+		else
+		{
+			return -1;
+		}
+	}
+
+	/**********GetAllFolderInADir***********/
+	int GetAllFolderNameInADir(const std::string &Directory, std::vector<std::string> &vfolderNames)
+	{
+		vfolderNames.clear();
+		if (fs::exists(Directory))
+		{
+			for (auto& p : fs::recursive_directory_iterator(Directory))
+			{
+				if (p.status().type() == fs::file_type::directory)
+				{
+					
+					vfolderNames.push_back(p.path().stem().string());
 				}
 			}
 			return 0;

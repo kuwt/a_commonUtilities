@@ -20,6 +20,7 @@ namespace dir
 
 	bool CheckFileExist(const std::string &FilePath);
 
-	int GetAllFolderInADir(const std::string &Directory, std::vector<std::string> &vfolderpaths);
+	int GetAllFolderPathInADir(const std::string &Directory, std::vector<std::string> &vfolderpaths);
+	int GetAllFolderNameInADir(const std::string &Directory, std::vector<std::string> &vfolderNames);
 	int FileCopy(const std::string &FromFilePath, const std::string &ToFilePath);
 }

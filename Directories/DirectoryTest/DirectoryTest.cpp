@@ -8,11 +8,19 @@ int main()
 {
 	// test 1
 	std::vector<std::string> folderPaths;
-	dir::GetAllFolderInADir("TestDirectories\\src",folderPaths);
+	dir::GetAllFolderPathInADir("TestDirectories\\src",folderPaths);
 	std::cout << "print folder paths" << "\n";
 	for (unsigned i = 0; i < folderPaths.size(); ++i)
 	{
 		std::cout << folderPaths.at(i) << "\n";
+	}
+
+	std::vector<std::string> folderNames;
+	dir::GetAllFolderNameInADir("TestDirectories\\src", folderNames);
+	std::cout << "print folder names" << "\n";
+	for (unsigned i = 0; i < folderNames.size(); ++i)
+	{
+		std::cout << folderNames.at(i) << "\n";
 	}
 
 	//test 2
