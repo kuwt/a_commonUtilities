@@ -1,49 +1,27 @@
-#include "..\configParaState.h"
-#include "..\CfgParaDef.h"
+
 #include "..\configinihandler.h"
 #include <iostream>
+#include<cstdio>
 int main()
 {
-	
-	// test get parameter from file and load it to ram for anytime use
+
+	std::cout << "Test 1: Get value from config file...\n";
 	{
 		int pyNum = 0;
-		ConfigParaState cfg;
-		int status = cfg.LoadCfgPara("..\\common.cfg");
-		if (status != 0)
-		{
-			std::cout << "file not exist\n";
-		}
-		else
-		{
-			status = cfg.GetParaState(_PARA_SECTION_SHAPE_ALIGNMENT, _PARA_PYRAMID_NUM, pyNum);
-		}
-
+		ConfiginiHandler cfg(".\\common.cfg");
+		cfg.GetValue("ShapeAlignment", "Pyramid_Number", pyNum);
 		std::cout << "if this number (" << pyNum << ") is equal to 1 but not 0, this test is passed." << "\n";
 
 		std::cout << "key press to continue...\n";
 		getchar();
 	}
 
-
+	std::cout << "Test 2: Print all entries in config file...\n";
 	{
-		ConfiginiHandler cfg("..\\crit_Left.ini");
+		ConfiginiHandler cfg(".\\crit_Left.ini");
 
-		std::cout << "Print...\n";
-
-		std::vector<std::string> sections;
-		cfg.GetAllSections(sections);
-		for (int i = 0; i < sections.size(); ++i)
-		{
-			std::vector<std::string> keys;
-			cfg.GetAllKeys(sections.at(i), keys);
-			for (int j = 0; j < keys.size(); ++j)
-			{
-				std::string value;
-				cfg.GetValue(sections.at(i), keys.at(j), value);
-				std::cout << sections.at(i) << " " << keys.at(j) << " " << value << "\n";
-			}
-		}
+		std::cout << "Printing...\n";
+		cfg.PrintAllSectionKeyValue();
 
 		std::cout << "key press to continue...\n";
 		getchar();

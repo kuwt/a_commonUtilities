@@ -24,13 +24,7 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\CfgParaDef.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\configinihandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\configparastate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\SimpleIni.h">
@@ -45,9 +39,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\configinihandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\configparastate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
