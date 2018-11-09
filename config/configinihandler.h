@@ -1,3 +1,15 @@
+/** @mainpage
+
+	<table>
+		<tr><th>Library     <td>configinihandler
+		<tr><th>File        <td>configinihandler.h
+		<tr><th>Author      <td>kuwingto
+	</table>
+
+	Based on SimpleIni, create an easy to use/understand simple api for config read/write. 
+	To use this file, you need both configinihandler.h and SimpleIni.h in your directory. 
+**/
+
 #ifndef CONFIGINIHANDLER_H
 #define CONFIGINIHANDLER_H
 #include <vector>
