@@ -7,7 +7,7 @@
 	</table>
 
 	Based on SimpleIni, create an easy to use/understand simple api for config read/write. 
-	To use this file, you need both configinihandler.h and SimpleIni.h in your directory. 
+	To use this file, you need all configinihandler.h, configinihandler.cpp and SimpleIni.h in your project. 
 **/
 
 #ifndef CONFIGINIHANDLER_H
