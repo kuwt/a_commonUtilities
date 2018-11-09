@@ -176,6 +176,7 @@ int ConfiginiHandler::GetAllKeys(const std::string sectionName, std::vector<std:
 
 ConfiginiHandler::~ConfiginiHandler()
 {
+	SaveDisk();
 	if (m_pCfg != NULL)
 	{
 		delete m_pCfg;
