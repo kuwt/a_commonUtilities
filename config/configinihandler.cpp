@@ -75,7 +75,42 @@ int ConfiginiHandler::GetValue(const std::string &strSection, const std::string 
     }
 	
 	return CONFIG_IO_FAIL;
+}
 
+int ConfiginiHandler::GetAllSections(std::vector<std::string> &sectionList)
+{
+	sectionList.clear();
+	CSimpleIniA::TNamesDepend sections;
+	m_pCfg->GetAllSections(sections);
+
+	for (auto i : sections)
+	{
+		const char *pszSections = i.pItem;
+		std::string strTemp(pszSections);
+		if (strTemp != "")
+		{
+			sectionList.push_back(strTemp);
+		}
+	}
+	return CONFIG_IO_OK;
+}
+
+int ConfiginiHandler::GetAllKeys(const std::string sectionName, std::vector<std::string> &keyList)
+{
+	keyList.clear();
+	CSimpleIniA::TNamesDepend keys;
+	m_pCfg->GetAllKeys(sectionName.c_str(),keys);
+
+	for (auto i : keys)
+	{
+		const char *pszKeys = i.pItem;
+		std::string strTemp(pszKeys);
+		if (strTemp != "")
+		{
+			keyList.push_back(strTemp);
+		}
+	}
+	return CONFIG_IO_OK;
 }
 
 ConfiginiHandler::~ConfiginiHandler()

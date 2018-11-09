@@ -14,7 +14,6 @@ public:
 	// File Interaction
 	int LoadCfgPara(const std::string &CfgFilePath);
 	int SaveCfgPara(const std::string &CfgFilePath);  // currently Disable
-	
 													   // RAM interaction
 	int SetParaState(const std::string &SectionKey, const std::string &strKey, const std::string &strValue);
 	int GetParaState(const std::string &SectionKey, const std::string &strKey, std::string &strValue) const;  // Value will not be changed if fail
