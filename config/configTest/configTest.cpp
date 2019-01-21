@@ -16,7 +16,45 @@ int main()
 		getchar();
 	}
 
-	std::cout << "Test 2: Print all entries in config file...\n";
+	std::cout << "Test 2: Get str value from config file...\n";
+	{
+		std::string strModelparameters;
+		ConfiginiHandler cfg(".\\config_Ycylinder.ini");
+		cfg.GetValue("Cylinder_Model", "ModelParameters", strModelparameters);
+		
+		std::string delimiter = ";";
+
+		bool bSplitAccordingToDelimiter = true;
+		std::string strSearchStr = strModelparameters;
+		std::vector<std::string> elements;
+		while (bSplitAccordingToDelimiter)
+		{
+			size_t loc = strSearchStr.find(delimiter);
+			if (loc != std::string::npos)
+			{
+				std::string element = strSearchStr.substr(0, loc);
+				std::string remainingElement = strSearchStr.substr(loc + 1, strSearchStr.size());
+				elements.push_back(element);
+				strSearchStr = remainingElement;
+			}
+			else
+			{
+				elements.push_back(strSearchStr);
+				bSplitAccordingToDelimiter = false;
+			}
+		}
+
+		std::cout << "Printing...\n";
+		for (int i = 0; i < elements.size(); ++i)
+		{
+			std::cout << elements.at(i) << "\n";
+		}
+
+		std::cout << "key press to continue...\n";
+		getchar();
+	}
+
+	std::cout << "Test 3: Print all entries in config file...\n";
 	{
 		ConfiginiHandler cfg(".\\crit_Left.ini");
 
@@ -26,6 +64,7 @@ int main()
 		std::cout << "key press to continue...\n";
 		getchar();
 	}
+
 
 	return 0;
 }
