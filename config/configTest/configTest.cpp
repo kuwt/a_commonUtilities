@@ -2,6 +2,36 @@
 #include "..\configinihandler.h"
 #include <iostream>
 #include<cstdio>
+
+int splitStringToElements(
+	const std::string &inputStr,
+	const std::string &delimiter,
+	std::vector<std::string> &outputElements)
+{
+	bool bSplitAccordingToDelimiter = true;
+	std::string strSearchStr = inputStr;
+	outputElements.clear();
+	while (bSplitAccordingToDelimiter)
+	{
+		size_t loc = strSearchStr.find(delimiter);
+		if (loc != std::string::npos)
+		{
+			std::string element = strSearchStr.substr(0, loc);
+			std::string remainingElement = strSearchStr.substr(loc + 1, strSearchStr.size());
+			outputElements.push_back(element);
+			strSearchStr = remainingElement;
+		}
+		else
+		{
+			outputElements.push_back(strSearchStr);
+			bSplitAccordingToDelimiter = false;
+		}
+	}
+
+	return 0;
+}
+
+
 int main()
 {
 
@@ -22,32 +52,28 @@ int main()
 		ConfiginiHandler cfg(".\\config_Ycylinder.ini");
 		cfg.GetValue("Cylinder_Model", "ModelParameters", strModelparameters);
 		
-		std::string delimiter = ";";
-
-		bool bSplitAccordingToDelimiter = true;
 		std::string strSearchStr = strModelparameters;
 		std::vector<std::string> elements;
-		while (bSplitAccordingToDelimiter)
-		{
-			size_t loc = strSearchStr.find(delimiter);
-			if (loc != std::string::npos)
-			{
-				std::string element = strSearchStr.substr(0, loc);
-				std::string remainingElement = strSearchStr.substr(loc + 1, strSearchStr.size());
-				elements.push_back(element);
-				strSearchStr = remainingElement;
-			}
-			else
-			{
-				elements.push_back(strSearchStr);
-				bSplitAccordingToDelimiter = false;
-			}
-		}
+		splitStringToElements(
+			strSearchStr,
+			";",
+			elements);
 
-		std::cout << "Printing...\n";
+		std::cout << "Printing elements...\n";
 		for (int i = 0; i < elements.size(); ++i)
 		{
 			std::cout << elements.at(i) << "\n";
+			std::vector<std::string> subelements;
+			splitStringToElements(
+				elements.at(i),
+				" ",
+				subelements);
+
+			std::cout << "Printing subelements...\n";
+			for (int i = 0; i < subelements.size(); ++i)
+			{
+				std::cout << subelements.at(i) << "\n";
+			}
 		}
 
 		std::cout << "key press to continue...\n";

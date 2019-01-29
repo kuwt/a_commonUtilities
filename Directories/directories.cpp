@@ -178,4 +178,35 @@ namespace dir
 			return -1;
 		}
 	}
+	
+	/**********FileRename***********/
+	int FileRename(const std::string &FromPathName, const std::string &ToPathName)
+	{
+		if (!FromPathName.empty() && !ToPathName.empty())
+		{
+			fs::rename(FromPathName, ToPathName);
+			return 0;
+		}
+		else
+		{
+			return -1;
+		}
+	}
+	
+	/**********GetBackupFileName***********/
+	void GetBackupFileName(const std::string &FileName, std::string &BackupFileName)
+	{
+		int proposeBackupIdx = 1;
+		std::string strproposeBackupIdx = std::to_string(proposeBackupIdx);
+		std::string tmpBackupFileName = FileName;
+		while (fs::exists(tmpBackupFileName))
+		{
+			strproposeBackupIdx = std::to_string(proposeBackupIdx);
+
+			tmpBackupFileName = FileName + strproposeBackupIdx;
+			proposeBackupIdx++;
+		}
+
+		BackupFileName = tmpBackupFileName;
+	}
 }

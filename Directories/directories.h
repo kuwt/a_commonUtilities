@@ -23,4 +23,7 @@ namespace dir
 	int GetAllFolderPathInADir(const std::string &Directory, std::vector<std::string> &vfolderpaths);
 	int GetAllFolderNameInADir(const std::string &Directory, std::vector<std::string> &vfolderNames);
 	int FileCopy(const std::string &FromFilePath, const std::string &ToFilePath);
+	int FileRename(const std::string &FromPathName, const std::string &ToPathName);
+	void GetBackupFileName(const std::string &FileName, std::string &BackupFileName);
+	
 }
