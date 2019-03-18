@@ -12,7 +12,7 @@ ConfiginiHandler::ConfiginiHandler(const std::string &strFile)
 	SI_Error status = m_pCfg->LoadFile(m_strPath.c_str());
 	if (status != SI_OK)
 	{
-		std::cout << "Fail to load config. File does not exist." << "\n";
+		std::cout << "Fail to load config. File " << strFile << " does not exist." << "\n";
 	}
 }
 
