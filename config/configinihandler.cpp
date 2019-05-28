@@ -48,7 +48,6 @@ int ConfiginiHandler::SetValue(const std::string &strSection, const std::string 
 
 int ConfiginiHandler::GetValue(const std::string &strSection, const std::string &strKey, std::string &strValue) const
 {
-	strValue = "";
 	if (m_pCfg)
 	{
 		const char *pszValue = m_pCfg->GetValue(strSection.c_str(), strKey.c_str(), NULL);
@@ -76,7 +75,6 @@ bool isNumeric(std::string isItNumeric)
 
 int ConvertStringToFloat(const std::string &str, float &f)
 {
-	f = 0;
 	if (isNumeric(str))
 	{
 		f = std::stof(str);
@@ -88,7 +86,6 @@ int ConvertStringToFloat(const std::string &str, float &f)
 
 int ConfiginiHandler::GetValue(const std::string &strSection, const std::string &strKey, float &fValue) const
 {
-	fValue = 0;
 	if (m_pCfg)
 	{
 		const char *pszValue = m_pCfg->GetValue(strSection.c_str(), strKey.c_str(), NULL);
@@ -110,7 +107,6 @@ int ConfiginiHandler::GetValue(const std::string &strSection, const std::string 
 
 int ConfiginiHandler::GetValue(const std::string &strSection, const std::string &strKey, int &iValue) const
 {
-	iValue = 0;
 	if (m_pCfg)
 	{
 		const char *pszValue = m_pCfg->GetValue(strSection.c_str(), strKey.c_str(), NULL);
