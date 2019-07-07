@@ -8,6 +8,17 @@
 
 	Based on SimpleIni, create an easy to use/understand simple api for config read/write. 
 	To use this file, you need all configinihandler.h, configinihandler.cpp and SimpleIni.h in your project. 
+
+	e.g.
+	
+	int pyNum = 0;
+	ConfiginiHandler cfg(".\\common.cfg");
+	cfg.GetValue("ShapeAlignment", "Pyramid_Number", pyNum);
+
+	std::string strModelparameters;
+	ConfiginiHandler cfg(".\\config_Ycylinder.ini");
+	cfg.GetValue("Cylinder_Model", "ModelParameters", strModelparameters);
+	
 **/
 
 #ifndef CONFIGINIHANDLER_H
