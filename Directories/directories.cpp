@@ -123,16 +123,29 @@ namespace dir
 	}
 
 	/**********GetAllFolderInADir***********/
-	int GetAllFolderPathInADir(const std::string &Directory, std::vector<std::string> &vfolderpaths)
+	int GetAllFolderPathInADir(const std::string &Directory, bool isIncludeSubFolder, std::vector<std::string> &vfolderpaths)
 	{
 		vfolderpaths.clear();
 		if (fs::exists(Directory))
 		{
-			for (auto& p : fs::recursive_directory_iterator(Directory))
+			if (isIncludeSubFolder)
 			{
-				if (p.status().type() == fs::file_type::directory)
+				for (auto& p : fs::recursive_directory_iterator(Directory))
 				{
-					vfolderpaths.push_back(p.path().string());
+					if (p.status().type() == fs::file_type::directory)
+					{
+						vfolderpaths.push_back(p.path().string());
+					}
+				}
+			}
+			else
+			{
+				for (auto& p : fs::directory_iterator(Directory))
+				{
+					if (p.status().type() == fs::file_type::directory)
+					{
+						vfolderpaths.push_back(p.path().string());
+					}
 				}
 			}
 			return 0;
@@ -144,20 +157,31 @@ namespace dir
 	}
 
 	/**********GetAllFolderInADir***********/
-	int GetAllFolderNameInADir(const std::string &Directory, std::vector<std::string> &vfolderNames)
+	int GetAllFolderNameInADir(const std::string &Directory, bool isIncludeSubFolder, std::vector<std::string> &vfolderNames)
 	{
 		vfolderNames.clear();
 		if (fs::exists(Directory))
 		{
-			for (auto& p : fs::recursive_directory_iterator(Directory))
+			if (isIncludeSubFolder)
 			{
-				if (p.status().type() == fs::file_type::directory)
+				for (auto& p : fs::recursive_directory_iterator(Directory))
 				{
-					
-					vfolderNames.push_back(p.path().stem().string());
+					if (p.status().type() == fs::file_type::directory)
+					{
+						vfolderNames.push_back(p.path().stem().string());
+					}
 				}
 			}
-			return 0;
+			else
+			{
+				for (auto& p : fs::directory_iterator(Directory))
+				{
+					if (p.status().type() == fs::file_type::directory)
+					{
+						vfolderNames.push_back(p.path().stem().string());
+					}
+				}
+			}
 		}
 		else
 		{

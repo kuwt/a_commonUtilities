@@ -8,7 +8,7 @@ int main()
 {
 	// test 1
 	std::vector<std::string> folderPaths;
-	dir::GetAllFolderPathInADir("TestDirectories\\src",folderPaths);
+	dir::GetAllFolderPathInADir("TestDirectories\\src", true, folderPaths);
 	std::cout << "print folder paths" << "\n";
 	for (unsigned i = 0; i < folderPaths.size(); ++i)
 	{
@@ -16,7 +16,7 @@ int main()
 	}
 
 	std::vector<std::string> folderNames;
-	dir::GetAllFolderNameInADir("TestDirectories\\src", folderNames);
+	dir::GetAllFolderNameInADir("TestDirectories\\src", true, folderNames);
 	std::cout << "print folder names" << "\n";
 	for (unsigned i = 0; i < folderNames.size(); ++i)
 	{
