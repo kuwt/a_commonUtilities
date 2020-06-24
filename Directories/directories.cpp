@@ -194,7 +194,7 @@ namespace dir
 	{
 		if (!FromFilePath.empty() && !ToFilePath.empty())
 		{
-			fs::copy(FromFilePath, ToFilePath);
+			fs::copy(FromFilePath, ToFilePath, fs::copy_options::overwrite_existing);
 			return 0;
 		}
 		else
