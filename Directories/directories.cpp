@@ -92,7 +92,7 @@ namespace dir
 	{
 		int proposeDirIdx = 0;
 		std::string strproposeDirIdx = std::to_string(proposeDirIdx);
-		std::string proposeDir = Rootdir + "\\" + folderName;
+		std::string proposeDir = Rootdir + "/" + folderName;
 
 		std::string proposeFullDir = proposeDir + strproposeDirIdx;
 
